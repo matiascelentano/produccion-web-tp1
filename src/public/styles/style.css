@@ -1,0 +1,75 @@
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+main{
+    background-color: #303030;
+    padding: 0;
+    flex-grow: 1;
+}
+h1, h2, h3, h4, h5, h6, p, a, span, button, label {
+    font-family: "Noto Sans", sans-serif;
+    color: #ffff;
+}
+
+.page-title {
+    padding: 10px 0;
+    background-color: #3f408d;
+}
+
+
+/* Estilos para el header y la barra de navegación */
+header{
+    padding: 20px;
+    background-color: #1f1f1f;
+    color: #ffff;
+}
+.navbar{
+    max-width: 1000px;
+}
+.navbar-nav{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+.navbar-nav .nav-item a {
+    color: #ffff;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 5px;
+}
+li.nav-item {
+    padding: 10px 0;
+}
+.navbar-nav .nav-item a:hover {
+    background-color: #343769;
+    color: #ffff;
+}
+button.navbar-toggler {
+    background-color: #c4c4c4;
+    border: 3px solid #ffffff;
+}
+
+button.navbar-toggler:hover {
+    border: 3px solid #343769;
+}
+#logout-link {
+    color: #c23939;
+}
+#logout-link:hover {
+    background-color: #bb5858;
+    color: #ffff;
+}
+#logo-header{
+    max-width: 75px;
+    max-height: 75px;
+    margin: 10px 15px;
+}
+
+@media (min-width: 992px) {
+    header{
+        display: flex;
+        justify-content: center; 
+    }
+}
