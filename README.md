@@ -11,6 +11,13 @@ La app permite gestionar autos y usuarios a través de interfaces web. Incluye:
 - Gestión de usuarios: listado, búsqueda, paginación y edición
 - Autorización por rol para proteger rutas administrativas
 
+## Tecnologías utilizadas
+
+- PHP 7.4+ con PDO
+- MySQL / MariaDB
+- HTML, CSS
+- XAMPP (para desarrollo local)
+
 ## Requisitos
 
 - PHP 7.4+ con PDO habilitado
@@ -18,53 +25,71 @@ La app permite gestionar autos y usuarios a través de interfaces web. Incluye:
 - XAMPP o servidor local similar
 - Navegador web
 
+## Instalación y configuración
+
+1. Clona o descarga el proyecto en el directorio `htdocs` de XAMPP (por ejemplo, `C:\xampp\htdocs\tp1`).
+
+2. Inicia XAMPP y asegúrate de que Apache y MySQL estén ejecutándose.
+
+3. Configura la base de datos:
+   - Abre phpMyAdmin (http://localhost/phpmyadmin).
+   - Crea una base de datos llamada `concesionaria`.
+   - Importa el archivo `src/sql/concesionaria.sql` para crear las tablas.
+   - Opcionalmente, importa `src/sql/seed_autos.sql` para cargar datos de ejemplo de autos.
+
+4. Verifica la configuración de la base de datos en `src/database/DB.php`:
+   ```php
+   private static $host = "localhost";
+   private static $db_name = "concesionaria";
+   private static $username = "root";
+   private static $password = "";
+   ```
+   Ajusta los valores según tu configuración de MySQL.
+
 ## Estructura del proyecto
 
 ```
 src/
   classes/
-    Auto.php          # Lógica CRUD de autos
-    Usuario.php       # Lógica de usuarios, login y permisos
-    Administrador.php # Registro de nuevo usuario por admin
-    Empleado.php      # Clase de usuario empleado
-    Marca.php         # Modelo de marcas
-    Autenticable.php  # Interface de autenticación
-    Gestionable.php   # Interface CRUD
+    Administrador.php     # Registro de nuevo usuario por admin
+    Autenticable.php      # Interface de autenticación
+    Auto.php              # Lógica CRUD de autos
+    Autorizacion.php      # Control de acceso por rol
+    Empleado.php          # Clase de usuario empleado
+    Gestionable.php       # Interface CRUD
+    Marca.php             # Modelo de marcas
+    Paginador.php         # Utilidad para paginación
+    Usuario.php           # Lógica de usuarios, login y permisos
   database/
-    DB.php            # Conexión PDO a MySQL
-  middleware/
-    Autorizacion.php # Control de acceso por rol
+    DB.php                # Conexión PDO a MySQL
   public/
+    assets/               # Recursos estáticos (imágenes, etc.)
     styles/
-      login.css       # Estilos para la pantalla de login
+      login.css           # Estilos para la pantalla de login
+      style.css           # Estilos generales
     views/
-      login.php       # Formulario de inicio de sesión
-      index.php       # Listado y búsqueda de autos
-      crearAuto.php   # Formulario de registro de auto
-      autoEdit.php    # Edición de auto
-      listaUsuarios.php # Listado de usuarios
-      crearUsuario.php # Formulario de registro de usuario
-      usuarioEdit.php   # Edición de usuario
+      autoEdit.php        # Edición de auto
+      crearAuto.php       # Formulario de registro de auto
+      crearUsuario.php    # Formulario de registro de usuario
+      index.php           # Listado y búsqueda de autos
+      listaUsuarios.php   # Listado de usuarios
+      login.php           # Formulario de inicio de sesión
+      usuarioEdit.php     # Edición de usuario
       includes/
-        header.php    # Menú de navegación y logout
-sql/
-  seed_autos.sql     # Seed de autos
+        header.php        # Menú de navegación y logout
+        styles.php        # Inclusión de estilos
+  sql/
+    concesionaria.sql     # Esquema de la base de datos
+    seed_autos.sql        # Datos de ejemplo para autos
+    seed_autos.sql.backup # Backup de seed
+README.md
 ```
 
-## Configuración de la base de datos
+## Ejecutar la aplicación
 
-1. Crea la base de datos `concesionaria` en MySQL.
-2. Importa el archivo `concesionaria.sql` si está disponible o crea las tablas manualmente.
-3. Asegúrate de que `src/database/DB.php` tenga los datos correctos:
-
-```php
-private static $host = "localhost";
-private static $db_name = "concesionaria";
-private static $username = "root";
-private static $password = "";
-```
-
-4. Si quieres cargar autos de ejemplo, importa `src/sql/seed_autos.sql`.
+1. Asegúrate de que XAMPP esté ejecutándose.
+2. Abre tu navegador y ve a: `http://localhost/tp1/src/public/views/login.php`
+3. Inicia sesión con credenciales válidas (por defecto, puede haber un usuario admin creado en la base de datos).
 
 ## Rutas principales y pantallas
 
@@ -98,6 +123,11 @@ private static $password = "";
 
 - `Usuario::buscarTodos($search, $limit, $offset)` lista usuarios con filtro y paginación
 - `Usuario::contarUsuarios($search)` cuenta usuarios
+
+## Notas adicionales
+
+- Asegúrate de que las rutas en los archivos PHP apunten correctamente al directorio del proyecto.
+- Para producción, considera usar un servidor web dedicado y configurar variables de entorno para la base de datos.
 - `Usuario::actualizar()` actualiza los datos del usuario
 
 ## Uso
