@@ -2,6 +2,14 @@
 
 Aplicación web básica de gestión de concesionaria creada en PHP con soporte para autos, usuarios y autenticación.
 
+# Usuarios de Prueba
+
+- Usuario Admin
+    - Email: matias@gmail.com
+- Usuario Empleado
+    - Email: pedro@gmail.com
+- Contraseña para ambos: 12345
+
 ## Descripción
 
 La app permite gestionar autos y usuarios a través de interfaces web. Incluye:
